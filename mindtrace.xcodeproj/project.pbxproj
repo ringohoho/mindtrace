@@ -8,11 +8,25 @@
 
 /* Begin PBXFileReference section */
 		798D9DD92DF0A1E90082D07F /* mindtrace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mindtrace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		798D9E1B2DF1C8F00082D07F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		798D9E192DF1C8DC0082D07F /* Exceptions for "mindtrace" folder in "mindtrace" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 798D9DD82DF0A1E90082D07F /* mindtrace */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		798D9DDB2DF0A1E90082D07F /* mindtrace */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				798D9E192DF1C8DC0082D07F /* Exceptions for "mindtrace" folder in "mindtrace" target */,
+			);
 			path = mindtrace;
 			sourceTree = "<group>";
 		};
@@ -33,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				798D9DDB2DF0A1E90082D07F /* mindtrace */,
+				798D9E1A2DF1C8F00082D07F /* Frameworks */,
 				798D9DDA2DF0A1E90082D07F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +58,14 @@
 				798D9DD92DF0A1E90082D07F /* mindtrace.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		798D9E1A2DF1C8F00082D07F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				798D9E1B2DF1C8F00082D07F /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,7 +276,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mindtrace/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MindTrace;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -277,7 +302,7 @@
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6,7";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Debug;
@@ -294,7 +319,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = mindtrace/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MindTrace;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -318,7 +345,7 @@
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6,7";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Release;
