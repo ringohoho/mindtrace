@@ -79,9 +79,6 @@ struct DayView: View {
                     .id("thoughts-bottom")
             }
             .listStyle(.plain)
-            .onAppear {
-                proxy.scrollTo("thoughts-bottom", anchor: .bottom)
-            }
             .onChange(of: self.thoughts.count) { old, new in
                 if new > old {
                     // is adding, move to bottom
@@ -125,10 +122,9 @@ struct DayView: View {
     private func deleteThought(_ thought: Thought) {
         modelContext.delete(thought)
     }
-
 }
 
 #Preview {
-    ContentView()
+    DaysView()
         .modelContainer(for: Thought.self, inMemory: true)
 }

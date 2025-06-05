@@ -48,7 +48,11 @@ struct DaysView: View {
     var body: some View {
         NavigationSplitView {
             ScrollViewReader { proxy in
-                List(self.days, id: \.self, selection: self.$selectedDay) {
+                List(
+                    self.days.reversed(),
+                    id: \.self,
+                    selection: self.$selectedDay
+                ) {
                     day in
                     let date = Calendar.current.date(
                         byAdding: .day,
@@ -70,12 +74,9 @@ struct DaysView: View {
                         .foregroundStyle(.secondary)
                     }
                     .fontDesign(.monospaced)
-                    .id(day)
-                }
-                .onAppear {
-                    proxy.scrollTo(self.days.last, anchor: .bottom)
                 }
             }
+            .navigationTitle("Days")
         } detail: {
             if let day = self.selectedDay {
                 let date = Calendar.current.date(
