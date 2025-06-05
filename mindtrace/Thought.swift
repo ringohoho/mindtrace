@@ -9,16 +9,18 @@ import Foundation
 import SwiftData
 
 @Model
-final class Thought {
+final class Thought: Identifiable {
+    var id = UUID()
     var day: Int
-    var id: Int
+    var created: Date
+    var updated: Date
+
     var content: String
-    var deleted: Bool
-    
-    init(day: Int, id: Int, content: String) {
+
+    init(day: Int, content: String) {
         self.day = day
-        self.id = id
+        self.created = Date.now
+        self.updated = Date.now
         self.content = content
-        self.deleted = false
     }
 }

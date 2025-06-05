@@ -28,13 +28,13 @@ extension Calendar {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    //    @Query private var thoughts: [Thought]
 
     private var birthday = Calendar.current.date(
         from: DateComponents(year: 1997, month: 8, day: 26)
     )!
-
     private var days: Range<Int>
+
+    @State private var selectedDay: Int?
 
     init() {
         let nDays =
@@ -48,43 +48,57 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             ScrollViewReader { proxy in
-                List {
-                    ForEach(self.days, id: \.self) { day in
-                        let date = Calendar.current.date(
-                            byAdding: .day,
-                            value: day - 1,
-                            to: self.birthday
-                        )!
+                List(self.days, id: \.self, selection: self.$selectedDay) {
+                    day in
+                    let date = Calendar.current.date(
+                        byAdding: .day,
+                        value: day - 1,
+                        to: self.birthday
+                    )!
 
-                        NavigationLink {
-                            DayView(day: day, date: date)
-                                .navigationTitle("\(String(day))")
-                                .navigationBarTitleDisplayMode(.inline)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text("\(String(day))")
-                                    .font(.headline)
-                                Text(
-                                    date,
-                                    format: Date.FormatStyle(
-                                        date: .abbreviated,
-                                        time: .omitted
-                                    )
-                                )
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                            }
-                            .fontDesign(.monospaced)
-                        }
-                        .id(day)
+                    VStack(alignment: .leading) {
+                        Text("\(String(day))")
+                            .font(.headline)
+                        Text(
+                            date,
+                            format: Date.FormatStyle(
+                                date: .abbreviated,
+                                time: .omitted
+                            )
+                        )
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                     }
+                    .fontDesign(.monospaced)
+                    .id(day)
                 }
                 .onAppear {
                     proxy.scrollTo(self.days.last, anchor: .bottom)
+                    self.selectedDay = self.days.last
                 }
             }
         } detail: {
-            Text("Select a day to begin")
+            if let day = self.selectedDay {
+                let date = Calendar.current.date(
+                    byAdding: .day,
+                    value: day - 1,
+                    to: self.birthday
+                )!
+                DayView(day: day, date: date)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                print("\(day)")
+                            } label: {
+                                Image("plus")
+                            }
+                        }
+                    }
+                    .navigationTitle("\(String(day))")
+                    .navigationBarTitleDisplayMode(.inline)
+            } else {
+                Text("Select a day to begin")
+            }
         }
     }
 }
