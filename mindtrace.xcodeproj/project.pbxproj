@@ -8,7 +8,6 @@
 
 /* Begin PBXFileReference section */
 		798D9DD92DF0A1E90082D07F /* mindtrace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mindtrace.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		798D9E1B2DF1C8F00082D07F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -47,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				798D9DDB2DF0A1E90082D07F /* mindtrace */,
-				798D9E1A2DF1C8F00082D07F /* Frameworks */,
 				798D9DDA2DF0A1E90082D07F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,14 +56,6 @@
 				798D9DD92DF0A1E90082D07F /* mindtrace.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		798D9E1A2DF1C8F00082D07F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				798D9E1B2DF1C8F00082D07F /* CloudKit.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
