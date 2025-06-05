@@ -85,15 +85,6 @@ struct ContentView: View {
                     to: self.birthday
                 )!
                 DayView(day: day, date: date)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button {
-                                print("\(day)")
-                            } label: {
-                                Image("plus")
-                            }
-                        }
-                    }
                     .navigationTitle("\(String(day))")
                     .navigationBarTitleDisplayMode(.inline)
             } else {

@@ -9,26 +9,20 @@ import SwiftData
 import SwiftUI
 
 struct DayView: View {
-    @State private var thoughts: [Thought]
-    @Query private var thoughts2: [Thought]
+    @Environment(\.modelContext) private var modelContext
 
-    @FocusState private var focusedThought: Int?
+    @Query private var thoughts: [Thought]
+
+    @FocusState private var focusedThought: UUID?
 
     private var day: Int
     private var date: Date
 
     init(day: Int, date: Date) {
-        self.thoughts = (1...10).map { _ in
-            Thought(
-                day: day,
-                content:
-                    "有点意思有点意思有点意思有点意思有点意思有点意思有点意思有点意思有点意思有点意思有点意思有点意思"
-            )
-        }
         self.day = day
         self.date = date
 
-        self._thoughts2 = Query(
+        self._thoughts = Query(
             filter: #Predicate { $0.day == day },
             sort: \.created
         )
@@ -39,7 +33,7 @@ struct DayView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     ForEach(
-                        Array(self.$thoughts.enumerated()),
+                        Array(self.thoughts.enumerated()),
                         id: \.element.id
                     ) { (index, thought) in
                         VStack(spacing: 10) {
@@ -54,19 +48,22 @@ struct DayView: View {
 
                             TextField(
                                 "",
-                                text: thought.content,
+                                text: Binding(
+                                    get: { thought.content },
+                                    set: { thought.content = $0 }
+                                ),
                                 axis: .vertical
                             )
                             .scrollDisabled(true)
                             .focused(
                                 self.$focusedThought,
-                                equals: index
+                                equals: thought.id
                             )
                         }
                         .padding(.horizontal)
                         .padding(.vertical, 12)
                         .onTapGesture {
-                            self.focusedThought = index
+                            self.focusedThought = thought.id
                         }
                     }
 
@@ -80,6 +77,12 @@ struct DayView: View {
             .onAppear {
                 proxy.scrollTo("thoughts-bottom", anchor: .bottom)
             }
+            .onChange(of: self.thoughts.count) { old, new in
+                if new > old {
+                    // is adding, move to bottom
+                    proxy.scrollTo("thoughts-bottom", anchor: .bottom)
+                }
+            }
             .scrollDismissesKeyboard(.interactively)
         }
         .toolbar {
@@ -90,6 +93,19 @@ struct DayView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: self.addThought) {
+                    Label("Add Item", systemImage: "plus")
+                }
+            }
+        }
+    }
+
+    func addThought() {
+        let newThought = Thought(day: self.day, content: "")
+        modelContext.insert(newThought)
+        self.focusedThought = newThought.id
     }
 }
 
