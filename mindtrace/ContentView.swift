@@ -58,6 +58,8 @@ struct ContentView: View {
 
                         NavigationLink {
                             DayView(day: day, date: date)
+                                .navigationTitle("\(String(day))")
+                                .navigationBarTitleDisplayMode(.inline)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text("\(String(day))")

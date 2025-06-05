@@ -29,67 +29,57 @@ struct DayView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollViewReader { proxy in
-                ScrollView {
-                    VStack(spacing: 0) {
-                        ForEach(self.$thoughts, id: \.id) { thought in
-                            VStack(spacing: 10) {
-                                Text("#\(thought.id)")
-                                    .frame(
-                                        maxWidth: .infinity,
-                                        alignment: .leading
-                                    )
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                    .fontDesign(.monospaced)
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(self.$thoughts, id: \.id) { thought in
+                        VStack(spacing: 10) {
+                            Text("#\(thought.id)")
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .fontDesign(.monospaced)
 
-                                TextField(
-                                    "",
-                                    text: thought.content,
-                                    axis: .vertical
-                                )
-                                .scrollDisabled(true)
-                                .focused(
-                                    self.$focusedThought,
-                                    equals: thought.id
-                                )
-                            }
-                            .padding(.horizontal)
-                            .padding(.vertical, 12)
-                            .onTapGesture {
-                                self.focusedThought = thought.id
-                            }
+                            TextField(
+                                "",
+                                text: thought.content,
+                                axis: .vertical
+                            )
+                            .scrollDisabled(true)
+                            .focused(
+                                self.$focusedThought,
+                                equals: thought.id
+                            )
                         }
+                        .padding(.horizontal)
+                        .padding(.vertical, 12)
+                        .onTapGesture {
+                            self.focusedThought = thought.id
+                        }
+                    }
 
-                        // TODO: change to "Add" or something
-                        Color.clear
-                            .frame(maxWidth: .infinity, maxHeight: 20)
-                            .id("thoughts-bottom")
-                    }
-                    .padding(.vertical, 4)
+                    // TODO: change to "Add" or something
+                    Color.clear
+                        .frame(maxWidth: .infinity, maxHeight: 20)
+                        .id("thoughts-bottom")
                 }
-                .onAppear {
-                    proxy.scrollTo("thoughts-bottom", anchor: .bottom)
-                }
-                .scrollDismissesKeyboard(.interactively)
+                .padding(.vertical, 4)
             }
-            .navigationTitle("\(String(self.day))")
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") {
-                        self.focusedThought = nil
-                    }
+            .onAppear {
+                proxy.scrollTo("thoughts-bottom", anchor: .bottom)
+            }
+            .scrollDismissesKeyboard(.interactively)
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    self.focusedThought = nil
                 }
             }
-            //            .toolbar {
-            //                ToolbarItem(placement: .topBarTrailing) {
-            //                    Button("Add") {
-            //
-            //                    }
-            //                }
-            //            }
         }
     }
 }
