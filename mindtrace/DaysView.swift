@@ -8,24 +8,6 @@
 import SwiftData
 import SwiftUI
 
-extension Calendar {
-    func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
-        let numberOfDays = self.dateComponents(
-            [.day],
-            from: self.startOfDay(for: from),
-            to: self.startOfDay(for: to)
-        )
-
-        return numberOfDays.day! + 1
-    }
-
-    func dateWithoutTime(_ date: Date) -> Date {
-        self.date(
-            from: self.dateComponents([.year, .month, .day], from: date)
-        )!
-    }
-}
-
 struct DaysView: View {
     @Environment(\.modelContext) private var modelContext
 

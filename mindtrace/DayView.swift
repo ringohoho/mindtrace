@@ -23,7 +23,7 @@ struct DayView: View {
         self.date = date
 
         self._thoughts = Query(
-            filter: #Predicate { $0.day == day },
+            filter: #Predicate { $0.date == date },
             sort: \.created
         )
     }
@@ -108,7 +108,7 @@ struct DayView: View {
     }
 
     private func addThought() {
-        let newThought = Thought(day: self.day, content: "")
+        let newThought = Thought(date: self.date, content: "")
         modelContext.insert(newThought)
         self.focusedThought = newThought.id
     }
