@@ -86,7 +86,6 @@ struct ContentView: View {
                 )!
                 DayView(day: day, date: date)
                     .navigationTitle("\(String(day))")
-                    .navigationBarTitleDisplayMode(.inline)
             } else {
                 Text("Select a day to begin")
             }
