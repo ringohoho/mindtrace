@@ -74,7 +74,6 @@ struct ContentView: View {
                 }
                 .onAppear {
                     proxy.scrollTo(self.days.last, anchor: .bottom)
-                    self.selectedDay = self.days.last
                 }
             }
         } detail: {
